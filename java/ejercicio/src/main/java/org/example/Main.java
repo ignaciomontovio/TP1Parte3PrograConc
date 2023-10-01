@@ -14,7 +14,7 @@ public class Main
   public static final int LIMIT_NUMBER = 99;
   public static ArrayBlockingQueue<Integer> LIST_OF_NUMBERS;
 
-  public static class producerThread implements Runnable
+  public static class ProducerThread implements Runnable
   {
 
     @Override
@@ -30,8 +30,9 @@ public class Main
     }
   }
 
-  public static class consumerThread implements Runnable
+  public static class ConsumerThread implements Runnable
   {
+
     @Override
     public void run()
     {
@@ -47,14 +48,19 @@ public class Main
           number = LIST_OF_NUMBERS.take();
           sum += number;
           if (number > max)
+          {
             max = number;
+          }
           if (number < min)
+          {
             min = number;
+          }
           numberFrecuencyMap.put(number, numberFrecuencyMap.getOrDefault(number, 0) + 1);
         }
       } catch (Exception e)
       {
-        throw new NoSuchElementException("Error taking from queue LIST_OF_NUMBERS." + e.getMessage());
+        throw new NoSuchElementException(
+            "Error taking from queue LIST_OF_NUMBERS." + e.getMessage());
       }
       System.out.println("La suma de los valores es: " + sum);
       System.out.println("El valor máximo es: " + max);
@@ -79,8 +85,8 @@ public class Main
     Scanner scanIn = new Scanner(System.in);
     AMOUNT_OF_NUMBERS = Integer.parseInt(scanIn.nextLine());
     LIST_OF_NUMBERS = new ArrayBlockingQueue<>(AMOUNT_OF_NUMBERS);
-    Thread producer = new Thread(new producerThread());
-    Thread consumer = new Thread(new consumerThread());
+    Thread producer = new Thread(new ProducerThread());
+    Thread consumer = new Thread(new ConsumerThread());
     producer.start();
     consumer.start();
 
