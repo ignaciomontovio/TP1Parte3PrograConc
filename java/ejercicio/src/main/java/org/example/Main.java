@@ -81,7 +81,6 @@ public class Main
 
   public static void main(String[] args) throws InterruptedException
   {
-    System.out.println("Ingrese la cantidad de números a evaluar");
     AMOUNT_OF_NUMBERS = Integer.parseInt(args[0]);
     LIST_OF_NUMBERS = new ArrayBlockingQueue<>(AMOUNT_OF_NUMBERS);
     Thread producer = new Thread(new ProducerThread());
