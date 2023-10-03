@@ -65,7 +65,7 @@ public class Main
       System.out.println("La suma de los valores es: " + sum);
       System.out.println("El valor máximo es: " + max);
       System.out.println("El valor mínimo es: " + min);
-      System.out.println("El promedio de los valores es: " + sum / AMOUNT_OF_NUMBERS);
+      System.out.println("El promedio de los valores es: " + (float)sum / AMOUNT_OF_NUMBERS);
       Integer maxFrecuency = numberFrecuencyMap.values().stream().max(Integer::compare).get();
       System.out.println("El/Los valor/es mas frecuente/s son: ");
       numberFrecuencyMap.forEach((key, value) ->
@@ -81,9 +81,7 @@ public class Main
 
   public static void main(String[] args) throws InterruptedException
   {
-    System.out.println("Ingrese la cantidad de números a evaluar");
-    Scanner scanIn = new Scanner(System.in);
-    AMOUNT_OF_NUMBERS = Integer.parseInt(scanIn.nextLine());
+    AMOUNT_OF_NUMBERS = Integer.parseInt(args[0]);
     LIST_OF_NUMBERS = new ArrayBlockingQueue<>(AMOUNT_OF_NUMBERS);
     Thread producer = new Thread(new ProducerThread());
     Thread consumer = new Thread(new ConsumerThread());
